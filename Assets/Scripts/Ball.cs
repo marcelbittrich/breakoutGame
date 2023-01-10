@@ -10,8 +10,8 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startVelocity.x = 3.0f;
-        startVelocity.y = 4.0f;
+        startVelocity.x = 0.0f;
+        startVelocity.y = -8.0f;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = startVelocity;
     }
