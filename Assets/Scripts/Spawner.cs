@@ -26,7 +26,9 @@ public class Spawner : MonoBehaviour
 
     void OnObstacleDestroy(GameObject obstacle) {
         if (Random.value < powerUpDropChance) {
-            Instantiate(powerUpPrefab, obstacle.transform.position, Quaternion.identity);
+            GameObject powerUp = Instantiate(powerUpPrefab, obstacle.transform.position, Quaternion.identity);
+            Rigidbody2D rb = powerUp.GetComponent<Rigidbody2D>();
+            rb.velocity = new Vector2(0.0f, -3.0f);
             Debug.Log("success! hussa!");
         }
     }

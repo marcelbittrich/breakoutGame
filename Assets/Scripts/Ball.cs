@@ -45,7 +45,9 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.position = Vector3.zero;
+        if (collision.gameObject.tag == "BorderBottom") {
+            transform.position = Vector3.zero;
+        }
     }
 
     private void HandlePlayerCollision(Collision2D collision)
