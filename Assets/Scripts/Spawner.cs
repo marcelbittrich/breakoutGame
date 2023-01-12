@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject obstaclePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,9 @@ public class Spawner : MonoBehaviour
     void Spawn() {
         for (int i = 0; i <= 5; i++)
         {
-            Instantiate(prefab, new Vector2(-8.0f + i * 2.0f, 4.0f), Quaternion.identity);
+            Instantiate(obstaclePrefab, new Vector2(-8.0f + i * 2.0f, 4.0f), Quaternion.identity);
         }
     }
+
+
 }
