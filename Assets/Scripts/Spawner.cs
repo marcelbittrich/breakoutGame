@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject obstaclePrefab;
+    public float powerUpDropChance = 0.2f;
+
+    public Obstacle obstaclePrefab;
+    public GameObject powerUpPrefab;
+    public Ball ball;
 
     // Start is called before the first frame update
     void Start()
     {
+        ball.ObstacleDestroyEvent += OnObstacleDestroy;
         Spawn();
     }
 
     void Spawn() {
         for (int i = 0; i <= 5; i++)
         {
-            Instantiate(obstaclePrefab, new Vector2(-8.0f + i * 2.0f, 4.0f), Quaternion.identity);
+            Obstacle obstacle = Instantiate<Obstacle>(obstaclePrefab, new Vector2(-8.0f + i * 2.0f, 4.0f), Quaternion.identity);
         }
     }
 
-
+    void OnObstacleDestroy(GameObject obstacle) {
+        if (Random.value < powerUpDropChance) {
+            Instantiate(powerUpPrefab, obstacle.transform.position, Quaternion.identity);
+            Debug.Log("success! hussa!");
+        }
+    }
 }

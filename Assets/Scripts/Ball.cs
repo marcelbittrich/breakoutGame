@@ -10,6 +10,10 @@ public class Ball : MonoBehaviour
     public Vector2 startVelocity;
     public float contactBounceStrength = 5f;
 
+    public delegate void OnObstacleDestroyHandler(GameObject instance);
+    public event OnObstacleDestroyHandler ObstacleDestroyEvent;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +32,7 @@ public class Ball : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Target") {
+            ObstacleDestroyEvent?.Invoke(collision.gameObject);
             Destroy(collision.gameObject);
         }
 

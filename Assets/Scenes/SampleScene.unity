@@ -854,7 +854,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3292c7ceb0985ea419553f6fb18f758f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 3765673292371423150, guid: cfcf50e3193ed6c48ac393bc5fcdb2b1, type: 3}
+  powerUpDropChance: 0.9
+  obstaclePrefab: {fileID: 5816676579113246186, guid: cfcf50e3193ed6c48ac393bc5fcdb2b1, type: 3}
+  powerUpPrefab: {fileID: 3390548323401885659, guid: 375bcac62d83c9345922af884d028def, type: 3}
+  ball: {fileID: 221067758}
 --- !u!4 &1950960476
 Transform:
   m_ObjectHideFlags: 0
