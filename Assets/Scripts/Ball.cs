@@ -9,21 +9,22 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rb;
     public Vector2 startVelocity;
     public float contactBounceStrength = 5f;
+    public float ballVelocity = 8.0f;
 
     public delegate void OnObstacleDestroyHandler(GameObject instance);
     public event OnObstacleDestroyHandler ObstacleDestroyEvent;
 
     public Player myPlayer;
     private bool gameIsStarted = false;
+    public float minYVelocity = 0.5f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        startVelocity.x = 0.0f;
-        startVelocity.y = 8.0f;
+        startVelocity.x = 0;
+        startVelocity.y = ballVelocity;
         rb = GetComponent<Rigidbody2D>();
-        
     }
 
     // Update is called once per frame
@@ -39,11 +40,16 @@ public class Ball : MonoBehaviour
                 rb.velocity = startVelocity;
             }
         }
+        if (Mathf.Abs(rb.velocity.y) < minYVelocity) {
+            rb.velocity = rb.velocity + new Vector2(0, 4.0f) * Time.deltaTime;
+            ResetVelocity();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Target") {
+            GameManager.Instance.IncreaseScore();
             ObstacleDestroyEvent?.Invoke(collision.gameObject);
             Destroy(collision.gameObject);
         }
@@ -58,7 +64,7 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "BorderBottom") {
-            transform.position = Vector3.zero;
+            gameIsStarted = false;
         }
     }
 
@@ -70,9 +76,13 @@ public class Ball : MonoBehaviour
         ContactPoint2D contactPoint = collision.GetContact(0);
 
         float positionOnPlayerBar = (contactPoint.point.x - playerCenter.x) / (playerWidth / 2);
-        float ballVelocity = rb.velocity.magnitude;
 
         Vector2 newBallDirection = rb.velocity + new Vector2(positionOnPlayerBar * contactBounceStrength, 0);
-        rb.velocity = newBallDirection.normalized * ballVelocity;
+        ResetVelocity();
+    }
+
+    private void ResetVelocity()
+    {
+        rb.velocity = rb.velocity.normalized * ballVelocity;
     }
 }
