@@ -13,20 +13,32 @@ public class Ball : MonoBehaviour
     public delegate void OnObstacleDestroyHandler(GameObject instance);
     public event OnObstacleDestroyHandler ObstacleDestroyEvent;
 
+    public Player myPlayer;
+    private bool gameIsStarted = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         startVelocity.x = 0.0f;
-        startVelocity.y = -8.0f;
+        startVelocity.y = 8.0f;
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = startVelocity;
+        
     }
 
     // Update is called once per frame
     void Update()
-    {
-
+    {   
+        if (!gameIsStarted)
+        {
+            float ballPlayerDistance = transform.localScale.y / 2 + myPlayer.transform.localScale.y / 2; 
+            transform.position = myPlayer.transform.position + new Vector3(0, ballPlayerDistance, 0);
+            if (Input.GetButtonDown("Jump"))
+            {
+                gameIsStarted = true;
+                rb.velocity = startVelocity;
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

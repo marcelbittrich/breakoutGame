@@ -18,10 +18,10 @@ public class PowerUp : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("power up triggerst something");
+        //Debug.Log("power up triggerst something");
         if (collision.gameObject.tag == "BorderBottom")
         {
-            Debug.Log("power up triggerst border bottom");
+            //Debug.Log("power up triggerst border bottom");
             Destroy(gameObject);
         }
     }
