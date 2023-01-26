@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         ScoreText.text = score.ToString();
-        LivesText.text = $"Lives: {lives}";
+        LivesText.text = $"LIVES: {lives}";
     }
 
     public void IncreaseScore() {
