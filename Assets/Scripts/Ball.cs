@@ -65,12 +65,12 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.tag == "BorderBottom") {
             gameIsStarted = false;
+            GameManager.Instance.DecreaseLifes();
         }
     }
 
     private void HandlePlayerCollision(Collision2D collision)
     {
-        Debug.Log("Handle player collision");
         Vector3 playerCenter = collision.gameObject.transform.position;
         float playerWidth = collision.gameObject.transform.localScale.x;
 
