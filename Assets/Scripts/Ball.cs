@@ -70,6 +70,7 @@ public class Ball : MonoBehaviour
 
     private void HandlePlayerCollision(Collision2D collision)
     {
+        Debug.Log("Handle player collision");
         Vector3 playerCenter = collision.gameObject.transform.position;
         float playerWidth = collision.gameObject.transform.localScale.x;
 
@@ -77,7 +78,7 @@ public class Ball : MonoBehaviour
 
         float positionOnPlayerBar = (contactPoint.point.x - playerCenter.x) / (playerWidth / 2);
 
-        Vector2 newBallDirection = rb.velocity + new Vector2(positionOnPlayerBar * contactBounceStrength, 0);
+        rb.velocity = rb.velocity + new Vector2(positionOnPlayerBar * contactBounceStrength, 0);
         ResetVelocity();
     }
 
